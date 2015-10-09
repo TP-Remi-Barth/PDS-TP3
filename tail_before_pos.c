@@ -78,12 +78,27 @@ static int tail_before_pos(int fd, off_t pos, ssize_t ntail){
   return 0;
 }
 
+static int tail(const char *path, ssize_t ntail){
+  int fd, ret;
+
+  if ((fd = open(path, O_RDONLY)) == -1){
+      perror(path);
+      exit(EXIT_FAILURE);
+    }
+
+  ret = tail_before_pos(fd, (off_t)0, ntail);
+
+  close(fd);
+
+  return ret;
+}
+
 int main(int ac, char **av){
 
-  int ret, n, fd;
+  int n;
 
   if (ac < 3){
-    fprintf(stderr, "invlid syntax\n");
+    fprintf(stderr, "usage: %s file ntail\n", av[0]);
     exit(EXIT_FAILURE);
   }
 
@@ -93,18 +108,5 @@ int main(int ac, char **av){
     exit(EXIT_FAILURE);
   }
 
-  if ((fd = open(av[1], O_RDONLY)) == -1){
-    perror(av[1]);
-    exit(EXIT_FAILURE);
-  }
-
-  ret = tail_before_pos(fd, (off_t)0, (ssize_t)n);
-  close(fd);
-
-  if (ret == -1){
-    perror(av[1]);
-    exit(EXIT_FAILURE);
-  }
-
-  return EXIT_SUCCESS;
+  return tail(av[1], (ssize_t)n);
 }
