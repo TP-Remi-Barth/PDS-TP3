@@ -20,7 +20,7 @@ RM = rm -vf
 #  « make » sans argument construit sa première cible
 #  Indiquez en dépendance le ou les binaires à construire
 
-all: tail_simple
+all: tail_simple tail_before_pos
 ## Compilation séparée
 #  Le .o doit être recompilé dès que le .c ou le .h (s'il existe) change
 %.o: %.c %.h
@@ -32,11 +32,15 @@ all: tail_simple
 tail_simple: tail_simple.o
 	${CC} ${LDFLAGS} -o $@ $^
 
+tail_before_pos: tail_before_pos.o
+	${CC} ${LDFLAGS} -o $@ $^
+
+
 clean:
 	${RM} *.o
 
 realclean: clean
-	${RM} tail_simple
+	${RM} tail_simple tail_before_pos
 
 # test: mdu test.sh
 # 	./test.sh
