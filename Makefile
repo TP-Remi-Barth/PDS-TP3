@@ -36,7 +36,7 @@ clean:
 	${RM} *.o
 
 realclean: clean
-	${RM} mdu
+	${RM} tail_simple
 
 # test: mdu test.sh
 # 	./test.sh
