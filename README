@@ -1,0 +1,19 @@
+PDS TP 3 - tail
+Barthélémy DELEMOTTE
+Rémi BOCQUET
+----------------------
+
+Compilation: make
+
+Fichiers:
+  + Makefile
+  + tail_simple.c
+  + tail_before_pos.c
+
+Utilisation:
+  + première partie: ./tail_simple file ntail
+  + deuxième partie: ./tail_before_pos file ntail
+
+La fonction tail() se trouve dans le fichier tail_before_pos.c
+
+La partie tail_utile n'a pas été réalisée.
